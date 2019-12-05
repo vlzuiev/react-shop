@@ -1,6 +1,4 @@
 
-
-// import { debug } from "util";
 export const addItemToCart = (cartItems, cartItemToAdd) => { 
     const existingCatItem = cartItems.find(cartItem => cartItem.id === cartItemToAdd.id);
      
@@ -15,8 +13,6 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 
 
 export const deleteOneItemFromCart = (cartItems, cartItemToDelete) => {
-    console.log(cartItems)
-    console.log(cartItemToDelete)
     const existingCatItem = cartItems.find(cartItem => cartItem.id === cartItemToDelete.id);
 
     if(existingCatItem){
