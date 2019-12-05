@@ -1,5 +1,4 @@
-import { debug } from "util";
-
+// import { debug } from "util";
 export const addItemToCart = (cartItems, cartItemToAdd) => { 
     const existingCatItem = cartItems.find(cartItem => cartItem.id === cartItemToAdd.id);
      
