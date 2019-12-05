@@ -1,3 +1,5 @@
+
+
 // import { debug } from "util";
 export const addItemToCart = (cartItems, cartItemToAdd) => { 
     const existingCatItem = cartItems.find(cartItem => cartItem.id === cartItemToAdd.id);
@@ -10,3 +12,26 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
     }  
     return [...cartItems, {...cartItemToAdd, quantity: 1}]
 } 
+
+
+export const deleteOneItemFromCart = (cartItems, cartItemToDelete) => {
+    console.log(cartItems)
+    console.log(cartItemToDelete)
+    const existingCatItem = cartItems.find(cartItem => cartItem.id === cartItemToDelete.id);
+
+    if(existingCatItem){
+        let items = cartItems.map(item => { 
+            if(item.id === cartItemToDelete.id && item.quantity > 1){
+                return {...item, quantity: item.quantity - 1 };
+            }  else if(item.id === cartItemToDelete.id && item.quantity === 1) {
+                return null;
+            }else{
+                return item;
+            }
+        }); 
+        let filetredItems = items.filter(item => item !== null);
+
+        return filetredItems; 
+    }  
+    return [...cartItems];
+}
