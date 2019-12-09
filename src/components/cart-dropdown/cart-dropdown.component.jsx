@@ -25,7 +25,7 @@ const CartDropDown = ({ cartItems, history, dispatch }) => {
         }}>GO TO CHECKOUT</CustomButton>
     </div>
 }
- 
+
 const mapStateToProps = createStructuredSelector({
     cartItems: selectCartItems
 });
