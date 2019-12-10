@@ -14,13 +14,13 @@ import ErrorPage from './pages/error/error.component'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import { createStructuredSelector} from 'reselect'
-import {selectCurrentUser} from './redux/user/user.selectors'
+import {selectCurrentUser} from './redux/user/user.selectors' 
 
 class App extends React.Component { 
   unsubsribeFromAuth = null
   
   componentDidMount() {
-    const { setCurrentUser } =this.props;
+    const { setCurrentUser } = this.props;
 
     this.unsubsribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if(userAuth){
@@ -31,12 +31,10 @@ class App extends React.Component {
             id: snapShot.id,
             ...snapShot.data()
           }); 
-        });
-       
-      }else{
-        setCurrentUser(userAuth);
+        }); 
       } 
-    })
+      setCurrentUser(userAuth); 
+    });
   }
 
   componentWillUnmount(){
@@ -63,8 +61,8 @@ class App extends React.Component {
   
 }
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser 
-}) 
+  currentUser: selectCurrentUser
+});
 
 const mapDispatchToProps = dispatch => {
   return {

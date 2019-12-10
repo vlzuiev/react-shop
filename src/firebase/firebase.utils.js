@@ -1,7 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import 'firebase/auth';
-
+import 'firebase/auth'; 
 
 const firebaseConfig = {
     apiKey: "AIzaSyBfu9wpv60Z5uYXbFJod7rQwIr_Pf8-Rek",
@@ -17,8 +16,8 @@ const firebaseConfig = {
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if(!userAuth) return;
  
-  const userRef = firestore.doc(`users/${userAuth.uid}`);
-  const snapShot = await userRef.get(); 
+  const userRef = firestore.doc(`users/${userAuth.uid}`); 
+  const snapShot = await userRef.get();  
 
   if(!snapShot.exists){
     const { displayName, email } = userAuth;
@@ -30,10 +29,29 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     catch(err){
       console.log(`Error during creation: ${err}`);
     }
-  }
-
+  } 
   return userRef;
 }
+
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map(doc => {
+    const { title, items } = doc.data();
+
+    return{
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items
+
+    }
+  }); 
+
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
+}
+ 
 
 firebase.initializeApp(firebaseConfig);
 
