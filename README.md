@@ -14,6 +14,8 @@ You will also see any lint errors in the console.
 
 ## Libraries been used 
 
-- REDUX 
-...
+### `REDUX`
+State library  
+### `Reselect` 
+Selectors for Redux library
  
