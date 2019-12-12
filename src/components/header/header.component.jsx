@@ -12,7 +12,7 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 //components
 import CartIcon from '../cart-icon/cart-icon.component';
-import CartDropDown from '../cart-dropdown/cart-dropdown.component';
+import CartDropDown from '../cart-dropdown/cart-dropdown.container';
 
 const Header = ({ currentUser, hidden }) => {
     return <HeaderContainer>
