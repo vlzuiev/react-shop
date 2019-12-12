@@ -14,15 +14,15 @@ You will also see any lint errors in the console.
 
 ## Libraries been used 
 
-### `redux`(https://github.com/facebook/create-react-app)
+### `redux`(https://redux.js.org/introduction/getting-started)
 State library  
-### `reselect` 
+### `reselect` (https://github.com/reduxjs/reselect)
 Selectors for Redux library
-### `Firebase`
+### `Firebase` (https://firebase.google.com/docs?hl=pl)
 Google Database  
-### `redux-persist`
+### `redux-persist` (https://github.com/rt2zz/redux-persist)
 Storing data   
-### `redux-thunk`
+### `redux-thunk` (https://github.com/reduxjs/redux-thunk)
 Helps to handle async requests in REDUX   
-### `styled-components`
+### `styled-components` (https://www.styled-components.com/docs)
 Create component using just sass   
