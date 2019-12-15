@@ -1,17 +1,14 @@
 import React from 'react';
 import './App.css';
 import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { setCurrentUser } from './redux/user/user.action';
+import { connect } from 'react-redux'; 
 
 import Home from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SignInUp from './pages/signinup/signinup.component';
 import Checkout from './pages/checkout/checkout.component';
-import ErrorPage from './pages/error/error.component'
-
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import ErrorPage from './pages/error/error.component' 
 
 import { createStructuredSelector} from 'reselect'
 import {selectCurrentUser} from './redux/user/user.selectors' 
@@ -19,22 +16,7 @@ import {selectCurrentUser} from './redux/user/user.selectors'
 class App extends React.Component { 
   unsubsribeFromAuth = null
   
-  componentDidMount() {
-    const { setCurrentUser } = this.props;
-
-    this.unsubsribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if(userAuth){
-        const userRef = await createUserProfileDocument(userAuth);
-
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({ 
-            id: snapShot.id,
-            ...snapShot.data()
-          }); 
-        }); 
-      } 
-      setCurrentUser(userAuth); 
-    });
+  componentDidMount() { 
   }
 
   componentWillUnmount(){
@@ -63,12 +45,7 @@ class App extends React.Component {
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
 });
-
-const mapDispatchToProps = dispatch => {
-  return {
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-}};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+  
+export default connect(mapStateToProps)(App);
 
 
