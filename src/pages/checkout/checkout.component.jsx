@@ -6,8 +6,9 @@ import StripeCheckoutButton from '../../components/stripe-button/stripe-button.c
 
 import { selectCartItems, selectCartTotal } from '../../redux/cart/car.selectors'
 import CheckoutItem from '../../components/checkout-item/checkout-item.component'
-
+ 
 const CheckoutPage = ({ cartItems, totalPrice }) => {
+    
     return <div className='checkout-page'>
         <div className='checkout-header'>
             <div className='header-block'>
