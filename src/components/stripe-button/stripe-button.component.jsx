@@ -1,16 +1,13 @@
 import React from 'react'
-import { connect } from 'react-redux';
-import { selectCurrentUser } from '../../redux/user/user.selectors';
-import { createStructuredSelector } from 'reselect';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../redux/user/user.selectors'; 
 import StripeCheckout from 'react-stripe-checkout';
 import { withRouter } from 'react-router-dom';
+ 
 
-class StripeCheckoutButton extends React.Component {
-    clickHandle() { 
-        return 
-    }
-    render() {
-        const { price, currentUser } = this.props;
+const StripeCheckoutButton = ({price, history}) => {  
+        const currentUser = useSelector(selectCurrentUser); 
+       
         const priceForStripe = price * 100;
         const publishableKey = 'pk_test_A0v5iG1WXz4n3RCfV8uCE2gD00CpAFKE9n'; 
 
@@ -33,15 +30,11 @@ class StripeCheckoutButton extends React.Component {
                 <button className="btn btn-primary">
                     Pay Now
                 </button>
-            </StripeCheckout> : <button onClick={() => this.props.history.push('/signin')}  className="btn btn-primary">
+            </StripeCheckout> : <button onClick={() => history.push('/signin')}  className="btn btn-primary">
                     Pay Now
                 </button>
         );
-    }
+    
 };
-
-const mapStateToProps = createStructuredSelector({
-    currentUser: selectCurrentUser
-});
-
-export default connect(mapStateToProps)(withRouter(StripeCheckoutButton));
+  
+export default withRouter(StripeCheckoutButton);
