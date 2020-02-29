@@ -54,3 +54,8 @@ export const signUpFailure = (err) => ({
     type: UserActionTypes.SIGN_UP_FAILURE,
     payload: err
 });
+
+
+export const signInStart = () => ({
+    type: UserActionTypes.SIGN_IN_START
+});
