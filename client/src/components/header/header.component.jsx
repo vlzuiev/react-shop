@@ -1,5 +1,6 @@
 import React  from 'react'; 
 import { ReactComponent as Logo } from '../../assets/crown.svg'; 
+import { FaUser } from 'react-icons/fa';
 //js styles
 import { HeaderContainer, LogoContainer, OptionsContainer, OptionLink } from './header.styles';
 
@@ -22,6 +23,7 @@ const Header = ({ currentUser, hidden, signOutStart }) => {
         </LogoContainer>
         <OptionsContainer>
             <OptionLink to='/shop'>SHOP</OptionLink> 
+            {/* <FaUser /> */}
             <OptionLink to='/contact'>CONTACT</OptionLink> 
             {
                 currentUser ? <OptionLink as='div' to='' onClick={signOutStart}> SIGN OUT </OptionLink> : <OptionLink to='/signin'>SIGN IN</OptionLink>
