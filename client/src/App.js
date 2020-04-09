@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { GlobalStyle } from './glogal.styles';
 import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Home from './pages/homepage/homepage.component';
-import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
-import SignInUp from './pages/signinup/signinup.component';
-import Checkout from './pages/checkout/checkout.component';
-import ErrorPage from './pages/error/error.component';
-
+import Spinner from './components/spinner/spinner.component';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.action';
-
 import { IconContext } from 'react-icons';
+
+//lazy loading with pages
+const HomePage = lazy(() => import('./pages/homepage/homepage.component'));
+const ShopPage = lazy(() => import('./pages/shop/shop.component'));
+const SignInUpPage = lazy(() => import('./pages/signinup/signinup.component'));
+const ErrorPage = lazy(() => import('./pages/error/error.component'));
+const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
+
 
 const App = ({ checkUserSession, currentUser }) => {
 
@@ -27,22 +29,22 @@ const App = ({ checkUserSession, currentUser }) => {
     <div className="App">
       <IconContext.Provider value={{ className: 'react-icons' }}>
         <Router>
-          <GlobalStyle /> 
+          <GlobalStyle />
           <Header />
           <Switch>
-            <Route exact path='/' component={Home} />
-            <Route path='/shop' component={ShopPage} />
-            <Route exact path='/checkout' component={Checkout} />
-            <Route exact path='/signin' render={() => currentUser ? (<Redirect to='/' />) : (<SignInUp />)} />
+            <Suspense fallback={<Spinner/>}>
+              <Route exact path='/' component={HomePage} />
+              <Route path='/shop' component={ShopPage} />
+              <Route exact path='/checkout' component={CheckoutPage} />
+              <Route exact path='/signin' render={() => currentUser ? (<Redirect to='/' />) : (<SignInUpPage />)} />
+            </Suspense> 
             <Route path='*' component={ErrorPage} />
+
           </Switch>
         </Router>
-      </IconContext.Provider>
-
+      </IconContext.Provider> 
     </div>
-  );
-
-
+  ); 
 }
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
