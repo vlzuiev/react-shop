@@ -1,0 +1,19 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { IconWrapper, CountCircle, Icon } from './favorite-icon.styles';
+import { selectFavoriteItemsCount } from '../../redux/favorite/favorite.selectors';
+import { createStructuredSelector } from 'reselect';
+
+const FavoriteIcon = ({ number }) => {
+    // const count = 2; 
+    return <IconWrapper>  
+        <Icon/>
+        <CountCircle> {number} </CountCircle>
+    </IconWrapper>
+};
+
+const mapStateToProps = createStructuredSelector({
+    number: selectFavoriteItemsCount
+}); 
+
+export default connect(mapStateToProps)(FavoriteIcon);

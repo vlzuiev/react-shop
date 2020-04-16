@@ -40,10 +40,8 @@ const App = ({ checkUserSession, currentUser }) => {
                 <Route exact path='/signin' render={() => currentUser ? (<Redirect to='/' />) : (<SignInUpPage />)} />
                 <Route component={ErrorPage} /> 
               </Switch>
-            </Suspense>
-
-          </ErrorBoundary>
-
+            </Suspense> 
+          </ErrorBoundary> 
         </Router>
       </IconContext.Provider>
     </div>

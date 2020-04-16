@@ -1,11 +1,13 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import StripeCheckout from 'react-stripe-checkout';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import { compose } from 'redux';
+import { clearCart } from '../../redux/cart/car.action'
 
-const StripeCheckoutButton = ({ price, history }) => {
+const StripeCheckoutButton = ({ price, history, clearCart }) => {
     const currentUser = useSelector(selectCurrentUser);
 
     const priceForStripe = price * 100;
@@ -13,14 +15,15 @@ const StripeCheckoutButton = ({ price, history }) => {
 
     const onToken = token => {
         axios({
-            url:'payment',
+            url: 'payment',
             method: 'post',
             data: {
                 amount: priceForStripe,
                 token
             }
         }).then(response => {
-            alert('Payment was Succesful');
+            alert('Payment was Succesful'); 
+            clearCart();
         }).catch(err => {
             console.log('Payment err: ', JSON.parse(err))
             alert("There was an issue with your credit cart. Please make sure you use the provided credit card")
@@ -49,4 +52,9 @@ const StripeCheckoutButton = ({ price, history }) => {
 
 };
 
-export default withRouter(StripeCheckoutButton);
+const mapDispatchToProps = dispatch => ({
+    clearCart: () => dispatch(clearCart())
+});
+
+export default compose(withRouter,
+    connect(null, mapDispatchToProps))(StripeCheckoutButton);
