@@ -19,7 +19,7 @@ const useOutsideAlerter = (ref, dispatch, callback) => {
           
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [ref]);
+    }, [ref, dispatch, callback]);
 }
 
 const CartDropDown = ({ cartItems, history, dispatch }) => {
