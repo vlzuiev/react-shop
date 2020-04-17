@@ -9,5 +9,15 @@ export const addOneFavorite = (favoriteItems, itemToAdd) => {
 };
 
 export const removeOneItem = (favoriteItems, itemToRemove) => {
-    return favoriteItems.find(item => item.id !== itemToRemove.id);
+    return favoriteItems.filter(item => item.id !== itemToRemove.id);
+}
+
+export const toggleItem = (favoriteItems, itemToToggle) => {
+    const findItem = favoriteItems.find(item => item.id === itemToToggle.id);
+    
+    if(findItem) {
+        return removeOneItem(favoriteItems, itemToToggle);
+    }else{
+        return [...favoriteItems, { ...itemToToggle }];
+    }
 }

@@ -10,4 +10,4 @@ export const selectFavoriteItems = createSelector(
 export const selectFavoriteItemsCount = createSelector(
     [selectFavoriteItems],
     (items) => items.reduce((acum) => acum + 1, 0)
-);
+); 
