@@ -2,7 +2,7 @@ import React from 'react'
 import { ItemWrapper, ItemColumn, ItemList, ItemImg, ItemTextBold, ItemLinkButton, ItemText, Break, Button } from './favorite-item.styles';
 import { connect } from 'react-redux';
 import { removeItemFromFavorite } from '../../redux/favorite/favorite.actions';
-import { addItem } from '../../redux/cart/car.action';
+import { addItem } from '../../redux/cart/cart.action';
 
 const FavoriteItem = ({ item, removeItem, addItemToCart }) => {
     return <ItemWrapper>

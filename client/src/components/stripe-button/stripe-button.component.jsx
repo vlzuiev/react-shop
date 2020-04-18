@@ -5,7 +5,7 @@ import StripeCheckout from 'react-stripe-checkout';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { compose } from 'redux';
-import { clearCart } from '../../redux/cart/car.action'
+import { clearCart } from '../../redux/cart/cart.action'
 
 const StripeCheckoutButton = ({ price, history, clearCart }) => {
     const currentUser = useSelector(selectCurrentUser);

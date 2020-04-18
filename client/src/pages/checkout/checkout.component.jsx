@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import './checkout.styles.scss';
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component'
 
-import { selectCartItems, selectCartTotal } from '../../redux/cart/car.selectors'
+import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selectors'
 import CheckoutItem from '../../components/checkout-item/checkout-item.component'
  
 const CheckoutPage = ({ cartItems, totalPrice }) => {

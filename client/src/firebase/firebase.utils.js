@@ -34,10 +34,10 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 }
 
-export const updateUserProfileDocument = async (userAuth, dataToUpdate) => { 
-  if (!userAuth) return; 
+export const updateUserProfileDocument = async (userAuth, dataToUpdate) => {
+  if (!userAuth) return;
 
-  const userRef = firestore.doc(`users/${userAuth.uid}`);  
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
   try {
     await userRef.set({ ...dataToUpdate }, { merge: true })
   }
@@ -48,6 +48,21 @@ export const updateUserProfileDocument = async (userAuth, dataToUpdate) => {
   return userRef;
 }
 
+export const getUserCartRef = async (userId) => {
+  if (!userId) return;
+ 
+  const cartRef = firestore.collection('carts').where('userId', '==', userId);
+  
+  const snapShot = await cartRef.get();
+
+  if (snapShot.empty) {
+    const cartDocRef = firestore.collection('carts').doc();
+    await cartDocRef.set({ userId, cartItems: [] }); 
+    return cartDocRef;
+  } else { 
+    return snapShot.docs[0].ref;
+  }
+} 
 
 export const convertCollectionsSnapshotToMap = (collections) => {
   const transformedCollection = collections.docs.map(doc => {
@@ -74,8 +89,7 @@ export const getCurrentUser = () => {
       resolve(userAuth);
     }, reject)
   });
-}
-
+}  
 
 firebase.initializeApp(firebaseConfig);
 

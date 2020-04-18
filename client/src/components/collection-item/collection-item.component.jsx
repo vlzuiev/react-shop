@@ -2,7 +2,7 @@ import React from 'react'
 import CustomButton from '../custom-button/cutom-button.component'
 import './collection-item.styles.scss' 
 import { connect } from 'react-redux';
-import { addItem } from '../../redux/cart/car.action'
+import { addItem } from '../../redux/cart/cart.action'
 import { toggleFavoriteItem } from '../../redux/favorite/favorite.actions' 
 import { Button } from './collection-item.styles';
 

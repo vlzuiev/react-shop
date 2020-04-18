@@ -7,7 +7,7 @@ import { HeaderContainer, LogoContainer, OptionsContainer, OptionLink } from './
 //selectors / redux
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { selectCartHidden } from '../../redux/cart/car.selectors';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 //components

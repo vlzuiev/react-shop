@@ -33,6 +33,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 cartItems: []
             }
+        case CartActionTypes.MEGRE_CART_WITH_FIRE_BASE: 
+            return{
+                ...state, 
+                cartItems: action.payload
+            }
         default:
             return state;
     }

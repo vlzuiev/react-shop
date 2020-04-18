@@ -1,7 +1,7 @@
 import React from 'react'
 import './cart-item.styles.scss'
 
-import {deleteOneItem} from '../../redux/cart/car.action'
+import {deleteOneItem} from '../../redux/cart/cart.action'
 import {connect} from 'react-redux'
 
 
