@@ -7,6 +7,7 @@ import { toggleCartHidden } from '../../redux/cart/cart.action';
 const useOutsideAlerter = (ref, dispatch, callback) => {
     useEffect(() => { 
         function handleClickOutside(event) { 
+            console.log(event.target.classList);
             if (ref.current && !ref.current.contains(event.target) 
             && (event.target.classList.contains("item-count") === false 
             && event.target.classList.contains("shopping-icon") === false))   
@@ -15,8 +16,7 @@ const useOutsideAlerter = (ref, dispatch, callback) => {
         } 
         
         document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-          
+        return () => { 
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [ref, dispatch, callback]);
@@ -25,7 +25,7 @@ const useOutsideAlerter = (ref, dispatch, callback) => {
 const CartDropDown = ({ cartItems, history, dispatch }) => {
     const wrapperRef = useRef(null);  
     useOutsideAlerter(wrapperRef, dispatch, toggleCartHidden);  
-
+    
     return <div ref={wrapperRef} className='cart-dropdown'>
         <div className='cart-items'>
             {

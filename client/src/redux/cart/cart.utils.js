@@ -28,18 +28,25 @@ export const deleteOneItemFromCart = (cartItems, cartItemToDelete) => {
 
 export const deleteItemFromCart = (cartItems, cartItemToDelete) => {
     return cartItems.filter(item => item.id !== cartItemToDelete.id);
-}
+}  
 
-export const mergeCarts = (cartItems, fireBaseCartItems) => {
-    let newFireBaseCartItems = fireBaseCartItems;
-    const newCartItems = cartItems.map(item => {
-        const existsFireBaseItem = fireBaseCartItems.find(x => x.id === item.id);
-        if(existsFireBaseItem){
-            newFireBaseCartItems = deleteOneItemFromCart(newFireBaseCartItems, existsFireBaseItem);
-            return { ...item, quantity: item.quantity + existsFireBaseItem.quantity};
-        } 
-        else 
+export const mergeCarts = (cartItems1, cartItems2) => {
+    let newCartItems2 = cartItems2;
+    const checkQuantity = cartItems1.map(item => {
+        const existingItem = newCartItems2.find(x => x.id === item.id);
+         
+        if(existingItem){ 
+            newCartItems2 = deleteItemFromCart(newCartItems2, existingItem);
+            return { ...item, quantity: item.quantity + existingItem.quantity};
+        }else{ 
             return item;
+        }
     }); 
-    return newFireBaseCartItems.concat(newCartItems);
-} 
+     
+    if(newCartItems2.length > 0){
+        return checkQuantity.concat(newCartItems2);
+    }
+    else{
+        return checkQuantity;
+    }
+}

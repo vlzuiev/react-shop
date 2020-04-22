@@ -17,6 +17,11 @@ export const selectCartHidden = createSelector(
     cart => cart.hidden
 );
 
+export const selectIsCartMerged = createSelector(
+    [selectCart],
+    cart => cart.isMerged
+);
+
 export const selectCartTotal = createSelector(
     selectCartItems,
     cartItems => cartItems.reduce((acum, item) => acum + (item.price * item.quantity), 0)

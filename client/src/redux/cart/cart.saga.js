@@ -1,7 +1,6 @@
-import { all, call, takeLatest, put, takeEvery, select } from 'redux-saga/effects'
-
+import { all, call, takeLatest, put, select } from 'redux-saga/effects'
 import { clearCart, mergeCartWithFireBase } from './cart.action';
-import { selectCartItems } from './cart.selectors';
+import { selectCartItems, selectIsCartMerged} from './cart.selectors';
 import UserActionTypes from '../user/user.types';
 import { selectCurrentUser } from '../user/user.selectors';
 import { CartActionTypes } from './cart.types';
@@ -31,9 +30,15 @@ export function* checkUserFireBaseCart({ payload: user }){
     try{ 
         const cartRef = yield getUserCartRef(user.id);
         const snapShot = yield cartRef.get();
-        const cartItems = yield select(selectCartItems);   
-        const mergedCart = mergeCarts(cartItems, snapShot.data().cartItems); 
-        yield put(mergeCartWithFireBase(mergedCart)); 
+        const cartItems = yield select(selectCartItems);  
+        const isCartMerged = yield select(selectIsCartMerged); 
+        if(isCartMerged !== true){
+            const mergedCart = mergeCarts(cartItems, snapShot.data().cartItems); 
+            yield put(mergeCartWithFireBase(mergedCart)); 
+        }else
+            yield put(mergeCartWithFireBase(snapShot.data().cartItems)); 
+        
+            
     }
     catch(ex){
         console.log(ex);

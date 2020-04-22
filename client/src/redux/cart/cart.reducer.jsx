@@ -3,7 +3,8 @@ import { addItemToCart, deleteOneItemFromCart, deleteItemFromCart } from './cart
 
 const INITIAL_STATE = {
     hidden: true,
-    cartItems: []
+    cartItems: [],
+    isMerged: false
 }
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -31,12 +32,14 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         case CartActionTypes.CLEAR_CART:
             return{
                 ...state,
-                cartItems: []
+                cartItems: [],
+                isMerged: false
             }
         case CartActionTypes.MEGRE_CART_WITH_FIRE_BASE: 
             return{
                 ...state, 
-                cartItems: action.payload
+                cartItems: action.payload,
+                isMerged: true
             }
         default:
             return state;
