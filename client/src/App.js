@@ -1,13 +1,9 @@
 import React, { useEffect, lazy, Suspense } from 'react';
 import { GlobalStyle } from './glogal.styles';
 import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 
-import Header from './components/header/header.component';
+import Header from './components/header/header.container';
 import Spinner from './components/spinner/spinner.component';
-import { createStructuredSelector } from 'reselect';
-import { selectCurrentUser } from './redux/user/user.selectors';
-import { checkUserSession } from './redux/user/user.action';
 import ErrorPage from './components/error-nomatch/error-nomatch.component';
 import { IconContext } from 'react-icons';
 import ErrorBoundary from './components/error-boudary/error-boundary.component';
@@ -47,15 +43,8 @@ const App = ({ checkUserSession, currentUser }) => {
       </IconContext.Provider>
     </div>
   );
-}
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
-});
+} 
 
-const mapDispatchToProps = dispatch => ({
-  checkUserSession: () => dispatch(checkUserSession())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
 
 

@@ -8,7 +8,7 @@ import { createStructuredSelector} from 'reselect'
 import { toggleCartHidden } from '../../redux/cart/cart.action';
 
 const CartIcon = ({ toogleCartHidden, itemCount }) => {
-    return <div className='cart-icon' onClick={toogleCartHidden}>
+    return <div id='cart-icon-block' className='cart-icon' onClick={toogleCartHidden}>
         <CartLogo className='shopping-icon' />
         <span className='item-count'>{itemCount}</span>
     </div>

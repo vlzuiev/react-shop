@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { PersistGate } from 'redux-persist/integration/react'
 
 import './index.css';
-import App from './App';
+import App from './App.container';
 import {store, persistor} from './redux/store'
 
 ReactDOM.render( 

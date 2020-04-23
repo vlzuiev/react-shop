@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component should render FormInput component 1`] = `
+<styled.div>
+  <Styled(NavLink)
+    to="/"
+  >
+    <ForwardRef(SvgCrown)
+      className="logo"
+    />
+  </Styled(NavLink)>
+  <styled.div>
+    <Styled(NavLink)
+      activeClassName="active"
+      to="/shop"
+    >
+      SHOP
+    </Styled(NavLink)>
+    <Styled(NavLink)
+      activeClassName="active"
+      to="/contact"
+    >
+      CONTACT
+    </Styled(NavLink)>
+    <Styled(NavLink)
+      activeClassName="active"
+      as="div"
+      onClick={[MockFunction]}
+      to=""
+    >
+       SIGN OUT 
+    </Styled(NavLink)>
+    <Connect(withRouter(FavoriteIcon)) />
+    <Connect(CartIcon) />
+  </styled.div>
+</styled.div>
+`;
