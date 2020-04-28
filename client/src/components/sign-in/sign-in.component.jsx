@@ -3,6 +3,7 @@ import './sign-in.styles.scss';
 import { connect } from 'react-redux'
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/cutom-button.component';
+import { Link } from 'react-router-dom';
 
 import { googleSignInStart, emailSignInStart } from '../../redux/user/user.action'
 
@@ -26,7 +27,8 @@ const SignIn = ({emailSignInStart , googleSignInStart}) => {
         <form onSubmit={handleSubmit}>
             <FormInput name='email' type='email' handleChange={handleChange} value={email} label='Email' required />
 
-            <FormInput name='password' type='password' handleChange={handleChange} value={password} label='Password' required />
+            <FormInput name='password' type='password' handleChange={handleChange} value={password} label='Password' required /> 
+            <Link to="/forgot-password" >Forgot password?</Link>  
             <div className='buttons'>
                 <CustomButton type='submit'>Sign in</CustomButton>
                 <CustomButton onClick={googleSignInStart} isGoogleSignIn >Sign in with Google</CustomButton>

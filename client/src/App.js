@@ -13,6 +13,7 @@ const ShopPage = lazy(() => import('./pages/shop/shop.component'));
 const SignInUpPage = lazy(() => import('./pages/signinup/signinup.component'));
 const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
 const FavoritePage = lazy(() => import('./pages/favorite/favorite.component'));
+const ForgotPasswordPage = lazy(() => import('./pages/forgot-password/forgot-password.component'));
 
 const App = ({ checkUserSession, currentUser }) => {
 
@@ -33,6 +34,7 @@ const App = ({ checkUserSession, currentUser }) => {
                 <Route exact path='/' component={HomePage} />
                 <Route path='/shop' component={ShopPage} />
                 <Route exact path='/checkout' component={CheckoutPage} />
+                <Route exact path='/forgot-password' component={ForgotPasswordPage} />
                 <Route exact path='/favorite' component={FavoritePage} /> 
                 <Route exact path='/signin' render={() => currentUser ? (<Redirect to='/' />) : (<SignInUpPage />)} />
                 <Route component={ErrorPage} /> 

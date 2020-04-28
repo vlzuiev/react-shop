@@ -1,12 +1,13 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 import UserTypes from './user.types';
-import { googleProvider, auth, createUserProfileDocument, getCurrentUser, updateUserProfileDocument } from '../../firebase/firebase.utils';
-import { signInSuccess, signInFailure, signOutFailure, signOutSuccess, signUpFailure, signUpSuccess, signInStart } from './user.action';
+import { googleProvider, auth, createOrUpdateUserProfileDocument, getCurrentUser } from '../../firebase/firebase.utils';
+import { sendEmailResetEmail } from '../../firebase/user.utils';
+import { signInSuccess, signInFailure, signOutFailure, signOutSuccess, signUpFailure, signUpSuccess, signInStart, forgotEmailFailure, forgotEmailSuccess } from './user.action'; 
 import UserActionTypes from './user.types';
 
 
 function* getSnapshotFromUserAuth(userAuth, additionalData){
-    const userRef = yield call(createUserProfileDocument, userAuth, additionalData);
+    const userRef = yield call(createOrUpdateUserProfileDocument, userAuth, additionalData);
 
     const userSnapshot = yield userRef.get();
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data()}));
@@ -16,8 +17,9 @@ function* getSnapshotFromUserAuth(userAuth, additionalData){
 function* signInWithGoogle() {
     try {
         const {user} = yield auth.signInWithPopup(googleProvider);
-        yield updateUserProfileDocument(user, { lastLogin: new Date()});
-        yield getSnapshotFromUserAuth(user);
+         
+        // yield sendEmailResetEmail(user.email);
+        yield getSnapshotFromUserAuth(user, { lastLogin: new Date()});
     } catch (err) {
         yield put(signInFailure(err))
     }
@@ -26,9 +28,8 @@ function* signInWithGoogle() {
 function* signInWithEmail({ payload: { email, password }}){
     try{
         yield put(signInStart());
-        const { user } = yield auth.signInWithEmailAndPassword(email, password); 
-        yield updateUserProfileDocument(user, { lastLogin: new Date()});
-        yield getSnapshotFromUserAuth(user);
+        const { user } = yield auth.signInWithEmailAndPassword(email, password);  
+        yield getSnapshotFromUserAuth(user, { lastLogin: new Date()});
     }catch(err){
         yield put(signInFailure(err));
     }
@@ -54,12 +55,11 @@ function* signOut(){
 }
 
 function* signUp({payload: {email, password, displayName}}){  
-    try{ 
-        console.log(email, password, displayName);
+    try{  
         const { user } = yield auth.createUserWithEmailAndPassword(email, password);
 
-        yield createUserProfileDocument( user, {displayName});
-        yield put(signUpSuccess({user, additionalData: { displayName}}))
+        yield createOrUpdateUserProfileDocument( user, { displayName, lastLogin: new Date() });
+        yield put(signUpSuccess({user, additionalData: { displayName, lastLogin: new Date()}}))
         yield getSnapshotFromUserAuth(user); 
     }
     catch(err){
@@ -69,6 +69,15 @@ function* signUp({payload: {email, password, displayName}}){
 
 function* signInAfterSignUp({payload: {user, additionalData}}){
     yield getSnapshotFromUserAuth(user, additionalData); 
+}
+
+function* forgotEmail({ payload }){
+    try{
+        yield sendEmailResetEmail(payload);
+        yield put(forgotEmailSuccess());
+    }catch(err){
+        yield put(forgotEmailFailure(err));
+    }
 }
 
 export function* onGoogleSignInStart() {
@@ -113,9 +122,16 @@ export function* onSignUpSuccess(){
     )
 }
 
-export function* userSagas() {
-    yield all([call(onGoogleSignInStart), call(onEmailSignInStart), call(onCheckUserSession), call(onSignOutStart), call(onSignUpStart), call(onSignUpSuccess)])
+export function* onForgotEmailStart() {
+    yield takeLatest(
+        UserActionTypes.FORGOT_EMAIL_START,
+        forgotEmail
+    );
 }
 
+export function* userSagas() {
+    yield all([call(onGoogleSignInStart), call(onEmailSignInStart), call(onCheckUserSession), 
+        call(onSignOutStart), call(onSignUpStart), call(onSignUpSuccess), call(onForgotEmailStart)]);
+} 
 
 export default userSagas;

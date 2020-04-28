@@ -13,7 +13,7 @@ const firebaseConfig = {
   measurementId: "G-FXK8Y532CX"
 };
 
-export const createUserProfileDocument = async (userAuth, additionalData) => {
+export const createOrUpdateUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -29,24 +29,27 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     catch (err) {
       console.log(`Error during creation: ${err}`);
     }
+  }else{
+    //update existing user
+      await userRef.set({ ...additionalData }, { merge: true })
   }
 
   return userRef;
 }
 
-export const updateUserProfileDocument = async (userAuth, dataToUpdate) => {
-  if (!userAuth) return;
+// export const updateUserProfileDocument = async (userAuth, dataToUpdate) => {
+//   if (!userAuth) return;
 
-  const userRef = firestore.doc(`users/${userAuth.uid}`);
-  try {
-    await userRef.set({ ...dataToUpdate }, { merge: true })
-  }
-  catch (err) {
-    console.log(`Error during creation: ${err}`);
-  }
+//   const userRef = firestore.doc(`users/${userAuth.uid}`);
+//   try {
+//     await userRef.set({ ...dataToUpdate }, { merge: true })
+//   }
+//   catch (err) {
+//     console.log(`Error during creation: ${err}`);
+//   }
 
-  return userRef;
-}
+//   return userRef;
+// }
 
 export const getUserCartRef = async (userId) => {
   if (!userId) return;

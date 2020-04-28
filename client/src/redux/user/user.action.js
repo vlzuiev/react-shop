@@ -53,9 +53,22 @@ export const signUpSuccess = (userData) => ({
 export const signUpFailure = (err) => ({
     type: UserActionTypes.SIGN_UP_FAILURE,
     payload: err
-});
-
+}); 
 
 export const signInStart = () => ({
     type: UserActionTypes.SIGN_IN_START
+});
+
+export const forgotEmailStart = email => ({
+    type: UserActionTypes.FORGOT_EMAIL_START,
+    payload: email
+});
+
+export const forgotEmailSuccess = () => ({
+    type: UserActionTypes.FORGOT_EMAIL_SUCCESS
+});
+
+export const forgotEmailFailure = errorMessage => ({
+    type: UserActionTypes.FORGOT_EMAIL_FAILURE,
+    payload: errorMessage
 });

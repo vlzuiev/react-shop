@@ -12,6 +12,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         case UserActionTypes.SIGN_OUT_START:
         case UserActionTypes.SIGN_IN_START:
         case UserActionTypes.SIGN_UP_START:
+        case UserActionTypes.FORGOT_EMAIL_START:
             return {
                 ...state,
                 isLoading: true
@@ -30,9 +31,15 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 errorMessage: null,
                 isLoading: false
             }
+        case UserActionTypes.FORGOT_EMAIL_SUCCESS:
+            return{
+                ...state,
+                isLoading: false
+            }
         case UserActionTypes.SIGN_IN_FAILURE:
         case UserActionTypes.SIGN_OUT_FAILURE:
         case UserActionTypes.SIGN_UP_FAILURE:
+        case UserActionTypes.FORGOT_EMAIL_FAILURE:
             return{
                 ...state,
                 errorMessage: action.payload,
