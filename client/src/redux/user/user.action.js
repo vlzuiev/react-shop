@@ -76,3 +76,7 @@ export const forgotEmailFailure = errorMessage => ({
 export const clearErrorMessage = () => ({
     type: UserActionTypes.CLEAR_ERROR_MESSAGE
 });
+
+export const toggleShowMenu = () => ({ 
+    type: UserActionTypes.TOGGLE_SHOW_MENU
+});

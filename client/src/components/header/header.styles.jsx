@@ -38,6 +38,11 @@ export const OptionsContainer = styled.div`
     }
 `;
 
+export const Option = styled.div`
+    padding: 10px 15px;
+    cursor: pointer; 
+`;
+
 export const OptionLink = styled(NavLink)`
     padding: 10px 15px;
     cursor: pointer;
@@ -48,5 +53,5 @@ export const OptionLink = styled(NavLink)`
 
 OptionLink.defaultProps = {
     activeClassName: 'active',
-  };
+};
  

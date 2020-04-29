@@ -1,21 +1,7 @@
-import {
-    takeLatest,
-    call,
-    put,
-    all
-} from 'redux-saga/effects';
-
-import {
-    firestore,
-    convertCollectionsSnapshotToMap
-} from '../../firebase/firebase.utils'
-
-import ShopActionTypes from './shop.types';
-
-import {
-    fetchCollecitonsSuccess,
-    fetchCollectionsFailure
-} from './shop.actions';
+import { takeLatest, call, put, all } from 'redux-saga/effects';
+import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils'
+import ShopActionTypes from './shop.types'; 
+import { fetchCollecitonsSuccess, fetchCollectionsFailure } from './shop.actions';
 
 function* fetchCollectionsAsync() {
     try {

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import CustomButton from '../custom-button/cutom-button.component'; 
 import FormInput from '../form-input/form-input.component'; 
-import { forgotEmailStart } from '../../redux/user/user.action'
+import { forgotEmailStart } from '../../redux/user/user.action';
+import { Form } from './forgot-password-form.styles';
 
 const ForgotPasswordForm = () => {
     const [email, setEmail] = useState('');
@@ -18,13 +19,13 @@ const ForgotPasswordForm = () => {
         dispatch(forgotEmailStart(email));
     } 
 
-    return <form onSubmit={handleSubmit}>
+    return <Form onSubmit={handleSubmit}>
         <h1>Forgot you passwort? Don't worry. </h1>
         <h3>Please enter your email</h3>
         <FormInput name='email' type='email' handleChange={handleChange} value={email} label='Email' required />
 
         <CustomButton type='submit'>Change password</CustomButton>
-    </form>
+    </Form>
 } 
 
 export default ForgotPasswordForm;

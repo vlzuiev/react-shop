@@ -3,7 +3,7 @@ import UserTypes from './user.types';
 import { googleProvider, auth, createOrUpdateUserProfileDocument, getCurrentUser } from '../../firebase/firebase.utils';
 import { sendEmailResetEmail } from '../../firebase/user.utils';
 import { signInSuccess, signInFailure, signOutFailure, signOutSuccess, 
-    signUpFailure, signUpSuccess, signInStart, forgotEmailFailure, forgotEmailSuccess } from './user.action'; 
+    signUpFailure, signUpSuccess, signInStart, forgotEmailFailure, forgotEmailSuccess, toggleShowMenu } from './user.action'; 
 import { showNotification } from '../notification/notification.actions';
 import UserActionTypes from './user.types';
 
@@ -18,11 +18,17 @@ function* getSnapshotFromUserAuth(userAuth, additionalData){
 
 function* signInWithGoogle() {
     try {
-        const {user} = yield auth.signInWithPopup(googleProvider);
-         
+        const { user } = yield auth.signInWithPopup(googleProvider)
+        .catch(() => {
+            throw Object.assign(
+                new Error('Cannot sign in with google'),
+                { code: 402 }
+             );
+        });
+ 
         // yield sendEmailResetEmail(user.email);
         yield getSnapshotFromUserAuth(user, { lastLogin: new Date()});
-    } catch (err) {
+    } catch (err) { 
         yield put(signInFailure(err))
     }
 }
@@ -33,6 +39,7 @@ function* signInWithEmail({ payload: { email, password }}){
         const { user } = yield auth.signInWithEmailAndPassword(email, password);  
         yield getSnapshotFromUserAuth(user, { lastLogin: new Date()});
     }catch(err){
+        yield put(showNotification('error'));
         yield put(signInFailure(err));
     }
 }
@@ -50,6 +57,7 @@ function* isUserAuthenticated(){
 function* signOut(){
     try{
         yield auth.signOut();
+        yield put(toggleShowMenu());
         yield put(signOutSuccess());
     }catch(err){
         yield put(signOutFailure(err));
@@ -82,7 +90,7 @@ function* forgotEmail({ payload }){
         yield put(showNotification('error'));
         yield put(forgotEmailFailure(`There is no account with ${payload} email`));
     }
-}
+} 
 
 export function* onGoogleSignInStart() {
     yield takeLatest(
@@ -131,7 +139,7 @@ export function* onForgotEmailStart() {
         UserActionTypes.FORGOT_EMAIL_START,
         forgotEmail
     );
-}
+} 
 
 export function* userSagas() {
     yield all([call(onGoogleSignInStart), call(onEmailSignInStart), call(onCheckUserSession), 

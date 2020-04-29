@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectIsLoading, selectErrMessage } from '../../redux/user/user.selectors';
 import { selectIsOpen, selectType } from '../../redux/notification/notification.selectors';
-import withSpinner from '../../components/with-spinner/with-spinner.component';
+// import withSpinner from '../../components/with-spinner/with-spinner.component';
 import { forgotEmailStart, clearErrorMessage } from '../../redux/user/user.action';
 import { closeNotification } from '../../redux/notification/notification.actions';
 import { connect } from 'react-redux';
@@ -22,6 +22,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default compose(
-    withSpinner,
-    connect(mapStateToProps, mapDispatchToProps)
+    connect(mapStateToProps, mapDispatchToProps),
+    // withSpinner
 )(ForgotPasswordPage);

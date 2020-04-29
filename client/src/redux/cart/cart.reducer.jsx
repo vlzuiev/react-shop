@@ -35,7 +35,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 cartItems: [],
                 isMerged: false
             }
-        case CartActionTypes.MEGRE_CART_WITH_FIRE_BASE: 
+        case CartActionTypes.MERGE_CART_WITH_FIRE_BASE: 
             return{
                 ...state, 
                 cartItems: action.payload,

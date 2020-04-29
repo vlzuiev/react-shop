@@ -3,10 +3,10 @@ import UserActionTypes from './user.types';
 const INITIAL_STATE = {
     currentUser: null,
     errorMessage: null,
-    isLoading: false
+    isLoading: false,
+    showMenu: false
 }
-
-//action has TYPE and PAYLOAD
+ 
 const userReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {  
         case UserActionTypes.SIGN_OUT_START:
@@ -49,6 +49,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return{
                 ...state,
                 errorMessage: null
+            }
+        case UserActionTypes.TOGGLE_SHOW_MENU:
+            return{
+                ...state,
+                showMenu: !state.showMenu
             }
         default:
             return state;

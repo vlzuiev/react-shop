@@ -71,7 +71,7 @@ export function* onCartChange(){
 
 export function* onMergeCartWithFireBase(){
     yield takeLatest(
-        CartActionTypes.MEGRE_CART_WITH_FIRE_BASE,
+        CartActionTypes.MERGE_CART_WITH_FIRE_BASE,
         updateFireBaseCart
     )
 }
