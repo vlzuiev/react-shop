@@ -13,7 +13,7 @@ const ShopPage = lazy(() => import('./pages/shop/shop.component'));
 const SignInUpPage = lazy(() => import('./pages/signinup/signinup.component'));
 const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
 const FavoritePage = lazy(() => import('./pages/favorite/favorite.component'));
-const ForgotPasswordPage = lazy(() => import('./pages/forgot-password/forgot-password.component'));
+const ForgotPasswordPage = lazy(() => import('./pages/forgot-password/forgot-password.container'));
 
 const App = ({ checkUserSession, currentUser }) => {
 

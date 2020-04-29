@@ -7,7 +7,5 @@ export const sendEmailResetEmail = async email => {
     
     await auth.sendPasswordResetEmail(formatEmail).then(res => {  
         return res;
-    }).catch((error) => {
-        console.log(`Cannot send password reset email ${error}`);
     });
 }

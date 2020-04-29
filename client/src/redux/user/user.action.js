@@ -72,3 +72,7 @@ export const forgotEmailFailure = errorMessage => ({
     type: UserActionTypes.FORGOT_EMAIL_FAILURE,
     payload: errorMessage
 });
+
+export const clearErrorMessage = () => ({
+    type: UserActionTypes.CLEAR_ERROR_MESSAGE
+});

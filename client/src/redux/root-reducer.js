@@ -1,5 +1,6 @@
 import userReducer from './user/user.reducer';
 import cartReducer from './cart/cart.reducer';
+import notificationReducer from './notification/notification.reducer';
 import directoryReducer from './directory/directory.reducer';
 import shopReducer from './shop/shop.reducer';
 import favoriteReducer from './favorite/favorite.reducer';
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
     cart: cartReducer,
     directory: directoryReducer,
     shop: shopReducer,
-    favorite: favoriteReducer
+    favorite: favoriteReducer,
+    notification: notificationReducer
 }); 
 
 export default persistReducer(persistConfig, rootReducer);

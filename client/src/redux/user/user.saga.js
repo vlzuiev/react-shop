@@ -2,7 +2,9 @@ import { takeLatest, put, all, call } from 'redux-saga/effects';
 import UserTypes from './user.types';
 import { googleProvider, auth, createOrUpdateUserProfileDocument, getCurrentUser } from '../../firebase/firebase.utils';
 import { sendEmailResetEmail } from '../../firebase/user.utils';
-import { signInSuccess, signInFailure, signOutFailure, signOutSuccess, signUpFailure, signUpSuccess, signInStart, forgotEmailFailure, forgotEmailSuccess } from './user.action'; 
+import { signInSuccess, signInFailure, signOutFailure, signOutSuccess, 
+    signUpFailure, signUpSuccess, signInStart, forgotEmailFailure, forgotEmailSuccess } from './user.action'; 
+import { showNotification } from '../notification/notification.actions';
 import UserActionTypes from './user.types';
 
 
@@ -74,9 +76,11 @@ function* signInAfterSignUp({payload: {user, additionalData}}){
 function* forgotEmail({ payload }){
     try{
         yield sendEmailResetEmail(payload);
+        yield put(showNotification('success')); 
         yield put(forgotEmailSuccess());
     }catch(err){
-        yield put(forgotEmailFailure(err));
+        yield put(showNotification('error'));
+        yield put(forgotEmailFailure(`There is no account with ${payload} email`));
     }
 }
 
