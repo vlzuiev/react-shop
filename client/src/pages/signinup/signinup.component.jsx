@@ -21,7 +21,8 @@ const SignInUp = ({ errorMessage, open, type, closeNotification }) => {
         <Notification severity={type} open={open} handleClose={closeNotification}>
             {errorMessage && errorMessage.toString()}
         </Notification>
-        <SignIn /><SignUp />
+        <SignIn />
+        <SignUp />
     </div>
 }
 

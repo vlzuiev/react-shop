@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { Link } from 'react-router-dom'
 
 const animateShowUp = keyframes`
     0% { height: 0px; }
@@ -22,7 +23,7 @@ export const DropDownWrapper = styled.div`
 `;
 
 
-export const Item = styled.div`
+export const Item = styled(Link)`
     height: 50px;
     width: 100%; 
     padding-top: 15px;

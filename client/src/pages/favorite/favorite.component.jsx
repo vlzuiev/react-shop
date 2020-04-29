@@ -21,7 +21,6 @@ const Favorite = ({ favoriteItems, itemsCount }) => {
                 </> 
                 : <BigText>You don't have any favorite items</BigText>
         }
-
     </FavoriteWrapper>
 
 }

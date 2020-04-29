@@ -4,9 +4,9 @@ import { AiOutlinePoweroff } from 'react-icons/ai';
 
 const ProfileDropDown = ({ signOutStart }) => (
     <DropDownWrapper>
-        <Item>Profile</Item>
-        <Item>History</Item>
-        <ItemWithIcon onClick={signOutStart}><AiOutlinePoweroff />Logout</ItemWithIcon>
+        <Item to='/profile'>Profile</Item>
+        <Item to='/'>History</Item>
+        <ItemWithIcon to='#'onClick={signOutStart}><AiOutlinePoweroff />Logout</ItemWithIcon>
     </DropDownWrapper>
 )
 

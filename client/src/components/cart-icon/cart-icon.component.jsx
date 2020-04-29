@@ -7,15 +7,15 @@ import { createStructuredSelector} from 'reselect'
 
 import { toggleCartHidden } from '../../redux/cart/cart.action';
 
-const CartIcon = ({ toogleCartHidden, itemCount }) => {
-    return <div id='cart-icon-block' className='cart-icon' onClick={toogleCartHidden}>
+const CartIcon = ({ toggleCartHidden, itemCount }) => {
+    return <div id='cart-icon-block' className='cart-icon' onClick={toggleCartHidden}>
         <CartLogo className='shopping-icon' />
         <span className='item-count'>{itemCount}</span>
     </div>
 }
 
 const mapDispatchToProps = dispatch => ({
-    toogleCartHidden: () => dispatch(toggleCartHidden())
+    toggleCartHidden: () => dispatch(toggleCartHidden())
 });
 
 const mapStateToProps = createStructuredSelector({

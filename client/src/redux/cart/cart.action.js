@@ -24,6 +24,6 @@ export const clearCart = () => ({
 });
 
 export const mergeCartWithFireBase = cartItems => ({
-    type: CartActionTypes.MEGRE_CART_WITH_FIRE_BASE,
+    type: CartActionTypes.MERGE_CART_WITH_FIRE_BASE,
     payload: cartItems
 });
