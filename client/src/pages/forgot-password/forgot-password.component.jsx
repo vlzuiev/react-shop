@@ -6,8 +6,8 @@ import ForgotPasswordForm from '../../components/forgot-password-form/forgot-pas
 const ForgotPasswordPage = ({ errorMessage, clearErrorMessage, open, type, closeNotification }) => {
     useEffect(() => {
         return () => clearErrorMessage();
-    }, [errorMessage, clearErrorMessage]);
-
+    }, [clearErrorMessage]); 
+    
     return <PageWrapper>
         <Container>
             <Notification severity={type} open={open} handleClose={closeNotification}>

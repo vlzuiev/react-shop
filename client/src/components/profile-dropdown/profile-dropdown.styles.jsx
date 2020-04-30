@@ -1,9 +1,14 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { Link } from 'react-router-dom'
 
 const animateShowUp = keyframes`
-    0% { height: 0px; }
-    100% { height: 200px; }
+    0% { height: 0px; padding: 0; }
+    100% { height: 200px; padding: 20;  }
+`;
+
+const animateHide = keyframes`
+    0% { height: 200px; padding: 20; }
+    100% { height: 0px; padding: 0; }
 `;
 
 export const DropDownWrapper = styled.div`
@@ -19,7 +24,7 @@ export const DropDownWrapper = styled.div`
     display: flex;
     border: 1px solid black;
     flex-direction: column;
-    animation: ${animateShowUp} .5s linear;
+    animation: ${ props => (props.show ? css`${animateShowUp} .2s linear` : css`${animateHide} .2s linear`) };
 `;
 
 

@@ -35,21 +35,7 @@ export const createOrUpdateUserProfileDocument = async (userAuth, additionalData
   }
 
   return userRef;
-}
-
-// export const updateUserProfileDocument = async (userAuth, dataToUpdate) => {
-//   if (!userAuth) return;
-
-//   const userRef = firestore.doc(`users/${userAuth.uid}`);
-//   try {
-//     await userRef.set({ ...dataToUpdate }, { merge: true })
-//   }
-//   catch (err) {
-//     console.log(`Error during creation: ${err}`);
-//   }
-
-//   return userRef;
-// }
+} 
 
 export const getUserCartRef = async (userId) => {
   if (!userId) return;

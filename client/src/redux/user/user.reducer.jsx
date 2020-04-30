@@ -13,6 +13,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         case UserActionTypes.SIGN_IN_START:
         case UserActionTypes.SIGN_UP_START:
         case UserActionTypes.FORGOT_EMAIL_START:
+        case UserActionTypes.CHANGE_PASSWORD_START:
             return {
                 ...state,
                 isLoading: true
@@ -40,6 +41,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         case UserActionTypes.SIGN_OUT_FAILURE:
         case UserActionTypes.SIGN_UP_FAILURE:
         case UserActionTypes.FORGOT_EMAIL_FAILURE:
+        case UserActionTypes.CHANGE_PASSWORD_FAILURE:
             return{
                 ...state,
                 errorMessage: action.payload,

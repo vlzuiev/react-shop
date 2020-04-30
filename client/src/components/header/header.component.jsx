@@ -22,7 +22,7 @@ const Header = ({ currentUser, hidden, showMenu, toggleShowMenu }) => {
             <CartIcon />
         </OptionsContainer>
         { hidden ? null : <CartDropDown /> }
-        { showMenu ? <ProfileDropDown/> : null } 
+        <ProfileDropDown show={showMenu} />
     </HeaderContainer>
 }
 

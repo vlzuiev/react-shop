@@ -21,3 +21,8 @@ export const selectShowMenu = createSelector(
     selectUser,
     user => user.showMenu
 );
+
+export const selectUserEmail = createSelector(
+    selectCurrentUser,
+    currentUser => currentUser.email
+);

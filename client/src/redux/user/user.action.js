@@ -80,3 +80,17 @@ export const clearErrorMessage = () => ({
 export const toggleShowMenu = () => ({ 
     type: UserActionTypes.TOGGLE_SHOW_MENU
 });
+
+export const changePasswordStart = (passwords) => ({
+    type: UserActionTypes.CHANGE_PASSWORD_START,
+    payload: passwords
+});
+
+export const changePasswordSuccess = () => ({
+    type: UserActionTypes.CHANGE_PASSWORD_SUCCESS
+});
+
+export const changePasswordFailure = errorMessage => ({
+    type: UserActionTypes.CHANGE_PASSWORD_FAILURE,
+    payload: errorMessage
+});
