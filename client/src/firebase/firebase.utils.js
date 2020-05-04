@@ -84,6 +84,7 @@ firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const emailAuthProv = firebase.auth.EmailAuthProvider;
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({ promt: 'select_account' });

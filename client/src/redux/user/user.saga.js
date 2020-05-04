@@ -1,6 +1,6 @@
 import { takeLatest, put, all, call, select } from 'redux-saga/effects';
 import UserTypes from './user.types';
-import { googleProvider, auth, createOrUpdateUserProfileDocument, getCurrentUser } from '../../firebase/firebase.utils';
+import { googleProvider, auth, createOrUpdateUserProfileDocument, getCurrentUser, emailAuthProv } from '../../firebase/firebase.utils';
 import { sendEmailResetEmail } from '../../firebase/user.utils';
 import { signInSuccess, signInFailure, signOutFailure, signOutSuccess, 
     signUpFailure, signUpSuccess, signInStart, forgotEmailFailure, forgotEmailSuccess, toggleShowMenu, 
@@ -98,16 +98,15 @@ function* forgotEmail({ payload }){
 function* changePassword({ payload: { oldPassword, newPassword }}){
     try{    
         const email = yield select(selectUserEmail);
-        // const oldCredentials = {
-        //     email,
-        //     oldPassword
-        // }; 
-        const credential = auth.EmailAuthProvider.credential(
-            email,
-            oldPassword
-        ); 
-        auth.currentUser.reauthenticateWithCredential(credential).then(() => console.log("success"))
-        .catch((err) => console.log(err));
+        const user = auth.currentUser;
+        const credential = yield emailAuthProv.credential(email, oldPassword);
+
+        yield user.reauthenticateWithCredential(credential);  
+        yield user.updatePassword(newPassword);
+        
+        yield put(changePasswordSuccess());
+        yield put(showNotification('success')); 
+        yield put(clearErrorMessage()); 
     }catch(err){
         yield put(showNotification('error')); 
         yield put(changePasswordFailure(err));

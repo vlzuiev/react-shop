@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import App from './App';
-
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.action';
@@ -15,4 +16,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter)
+    (App);

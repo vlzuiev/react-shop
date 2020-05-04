@@ -2,7 +2,7 @@ import React, { useEffect, lazy, Suspense } from 'react';
 import { GlobalStyle } from './glogal.styles';
 import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom';
 
-import Header from './components/header/header.container';
+import Header from './components/header/header.container';  
 import Spinner from './components/spinner/spinner.component';
 import ErrorPage from './components/error-nomatch/error-nomatch.component';
 import { IconContext } from 'react-icons';
@@ -15,14 +15,14 @@ const SignInUpPage = lazy(() => import('./pages/signinup/signinup.component'));
 const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
 const FavoritePage = lazy(() => import('./pages/favorite/favorite.component'));
 const ForgotPasswordPage = lazy(() => import('./pages/forgot-password/forgot-password.container'));
-const Profile = lazy(() => import('./pages/profile/profile.component'));
+const ProfilePage = lazy(() => import('./pages/profile/profile.container'));
 
-const App = ({ checkUserSession, currentUser }) => {
+const App = ({ checkUserSession, currentUser, history  }) => {
 
   useEffect(() => {
     checkUserSession()
-  }, [checkUserSession]); 
-
+  }, [checkUserSession]);  
+  
   return (
     <div className="App">
       <IconContext.Provider value={{ className: 'react-icons' }}>
@@ -38,11 +38,11 @@ const App = ({ checkUserSession, currentUser }) => {
                 <Route exact path='/forgot-password' component={ForgotPasswordPage} />
                 <Route exact path='/favorite' component={FavoritePage} /> 
                 <Route exact path='/signin' render={() => currentUser ? (<Redirect to='/' />) : (<SignInUpPage />)} />
-                <AuthenticatedRoute exact path='/profile' component={Profile} />
+                <AuthenticatedRoute exact path='/profile' component={ProfilePage} />
                 <Route component={ErrorPage} /> 
               </Switch>
             </Suspense> 
-          </ErrorBoundary> 
+          </ErrorBoundary>  
         </Router>
       </IconContext.Provider>
     </div>
