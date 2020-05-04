@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { ProfileWrapper } from './profile.styles';
+import { ProfileWrapper, ProfileColumn60, ProfileColumn40 } from './profile.styles';
 
 import Notification from '../../components/notification/notification.component'; 
-import ChangePassword from '../../components/change-password/change-password.container'; 
-
+import ProfilePersonal from '../../components/profile-personal/profile-personal.container'; 
+import ProfileMenu from '../../components/profile-menu/profile-menu.component';
 const Profile = ({ errorMessage, open, type, closeNotification, clearErrorMessage }) => {
 
     useEffect(() => {
@@ -13,9 +13,13 @@ const Profile = ({ errorMessage, open, type, closeNotification, clearErrorMessag
     return <ProfileWrapper>
             <Notification severity={type} open={open} handleClose={closeNotification}>
                 {errorMessage ? errorMessage.toString() : 'Password was changed'}
-            </Notification> 
-
-            <ChangePassword /> 
+            </Notification>
+            <ProfileColumn60> 
+                <ProfilePersonal />  
+            </ProfileColumn60> 
+            <ProfileColumn40> 
+                <ProfileMenu />  
+            </ProfileColumn40> 
         </ProfileWrapper> 
 } 
 
