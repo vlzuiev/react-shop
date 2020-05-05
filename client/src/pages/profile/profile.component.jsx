@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { ProfileWrapper, ProfileColumn60, ProfileColumn40 } from './profile.styles';
-
+import { Route } from 'react-router-dom';
 import Notification from '../../components/notification/notification.component'; 
-import ProfilePersonal from '../../components/profile-personal/profile-personal.container'; 
+
 import ProfileMenu from '../../components/profile-menu/profile-menu.component';
-const Profile = ({ errorMessage, open, type, closeNotification, clearErrorMessage }) => {
+import Spinner from '../../components/spinner/spinner.component';
+const ProfilePersonalSubPage = lazy(() => import('../../components/profile-personal/profile-personal.container'));
+
+const Profile = ({ errorMessage, open, type, closeNotification, clearErrorMessage, match }) => {
 
     useEffect(() => {
         return () => clearErrorMessage();
@@ -14,8 +17,11 @@ const Profile = ({ errorMessage, open, type, closeNotification, clearErrorMessag
             <Notification severity={type} open={open} handleClose={closeNotification}>
                 {errorMessage ? errorMessage.toString() : 'Password was changed'}
             </Notification>
-            <ProfileColumn60> 
-                <ProfilePersonal />  
+            <ProfileColumn60>  
+                <Suspense fallback={<Spinner />}>
+                    <Route exact path={`${match.path}`} component={ProfilePersonalSubPage} />
+                    <Route exact path={`${match.path}/history`} render={() => <div> HISTORY PAGE</div>} /> 
+                </Suspense> 
             </ProfileColumn60> 
             <ProfileColumn40> 
                 <ProfileMenu />  

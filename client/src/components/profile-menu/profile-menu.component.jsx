@@ -4,7 +4,7 @@ import { MenuWrapper, MenuItem } from './profile-menu.styles';
 const ProfileMenu = () => { 
     return <MenuWrapper> 
         <MenuItem to='/profile'>Profile Data</MenuItem>
-        <MenuItem to='/'>History</MenuItem> 
+        <MenuItem to='/profile/history'>History</MenuItem> 
      </MenuWrapper>
 }
 

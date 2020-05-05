@@ -38,7 +38,7 @@ const App = ({ checkUserSession, currentUser, history  }) => {
                 <Route exact path='/forgot-password' component={ForgotPasswordPage} />
                 <Route exact path='/favorite' component={FavoritePage} /> 
                 <Route exact path='/signin' render={() => currentUser ? (<Redirect to='/' />) : (<SignInUpPage />)} />
-                <AuthenticatedRoute exact path='/profile' component={ProfilePage} />
+                <AuthenticatedRoute path='/profile' component={ProfilePage} />
                 <Route component={ErrorPage} /> 
               </Switch>
             </Suspense> 

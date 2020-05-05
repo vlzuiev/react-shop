@@ -18,15 +18,17 @@ const ProfilePresonal = ({ currentUser }) => {
         setPersonalData({ ...personalData, [name]: value });
     }
  
-    return <div> 
-        <TitleText>Pesonal Information</TitleText>
+    return <form> 
+        <TitleText>Personal Information</TitleText>
         <FormInput name='displayName' type='text' handleChange={handleChange} value={displayName} label='Display Name' required /> 
         <TitleText>Login Data</TitleText>
         <FormInput name='email' type='email' handleChange={handleChange} value={email} label='Email' required /> 
 
-        <CustomButton onClick={() => setShowChangePassword(!showChangePassword)}>Change Password</CustomButton>
+        <CustomButton type='button' onClick={() => setShowChangePassword(!showChangePassword)}>Change Password</CustomButton>
         <ChangePassword show={showChangePassword} />
-    </div>
+
+        <CustomButton type='submit'>Submit Changes</CustomButton>
+    </form>
 };
 
 export default ProfilePresonal;
